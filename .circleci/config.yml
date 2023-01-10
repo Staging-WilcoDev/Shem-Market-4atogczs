@@ -20,4 +20,5 @@ workflows:
     jobs:
       # - build-and-test
       - node/test:
+          app-dir: frontend
           version: "16.18"
