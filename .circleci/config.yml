@@ -3,24 +3,21 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
 
-jobs:
-  build-and-test:
-    version: 16.18
-    executor: node/default
-    working_directory: ~/market/frontend
-    steps:
-      - checkout:
-          path: ~/market
-      - run:
-          name: Install deps
-          command: yarn install
-      - run:
-          name: Run tests
-          command: yarn test
+# jobs:
+#   build-and-test:
+#     executor: node/default
+#     working_directory: ~/market/frontend
+#     steps:
+#       - checkout:
+#           path: ~/market
+#       - node/install-packages:
+#           pkg-manager: yarn
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-and-test:
     jobs:
-      - build-and-test
+      # - build-and-test
+      - node/test:
+          version: node:16.18
