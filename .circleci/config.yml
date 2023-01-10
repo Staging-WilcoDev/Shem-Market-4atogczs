@@ -20,4 +20,4 @@ workflows:
     jobs:
       # - build-and-test
       - node/test:
-          version: 16.18
+          version: "16.18"
