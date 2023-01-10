@@ -10,3 +10,5 @@ workflows:
           app-dir: frontend
           version: "16.18"
           pkg-manager: yarn
+      - node/run:
+          yarn-run: lint
