@@ -1,9 +1,11 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.0.3
+
 jobs:
   build-and-test:
-    docker:
-      - image: cimg/node:16.18
+    executor: node/default
     working_directory: ~/market/frontend
     steps:
       - checkout:
