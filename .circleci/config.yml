@@ -22,3 +22,4 @@ workflows:
       - node/test:
           app-dir: frontend
           version: "16.18"
+          pkg-manager: yarn
