@@ -5,6 +5,7 @@ orbs:
 
 jobs:
   build-and-test:
+    version: 16.18
     executor: node/default
     working_directory: ~/market/frontend
     steps:
