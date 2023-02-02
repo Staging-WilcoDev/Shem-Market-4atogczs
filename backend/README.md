@@ -1,19 +1,22 @@
 # Anythink Market Backend
 
-The Anythink Market backend is Ruby web app written with [Ruby On Rails](https://rubyonrails.org/)
+The Anythink Market backend is Node web app written with [Express](https://expressjs.com/)
 
 ## Dependencies
 
-- [acts_as_follower](https://github.com/tcocca/acts_as_follower) - For implementing followers/following
-- [acts_as_taggable](https://github.com/mbleigh/acts-as-taggable-on) - For implementing tagging functionality
-- [Devise](https://github.com/plataformatec/devise) - For implementing authentication
-- [Jbuilder](https://github.com/rails/jbuilder) - Default JSON rendering gem that ships with Rails, used for making reusable templates for JSON output.
-- [JWT](https://github.com/jwt/ruby-jwt) - For generating and validating JWTs for authentication
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) - For generating JWTs used by authentication
+- [mongoose](https://github.com/Automattic/mongoose) - For modeling and mapping MongoDB data to javascript
+- [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator) - For handling unique validation errors in Mongoose. Mongoose only handles validation at the document level, so a unique index across a collection will throw an exception at the driver level. The `mongoose-unique-validator` plugin helps us by formatting the error like a normal mongoose `ValidationError`.
+- [passport](https://github.com/jaredhanson/passport) - For handling user authentication
+- [slug](https://github.com/dodo/node-slug) - For encoding titles into a URL-friendly format
 
-## Folders
+## Application Structure
 
-- `app/models` - Contains the database models for the application where we can define methods, validations, queries, and relations to other models.
-- `app/views` - Contains templates for generating the JSON output for the API
-- `app/controllers` - Contains the controllers where requests are routed to their actions, where we find and manipulate our models and return them for the views to render.
-- `config` - Contains configuration files for our Rails application and for our database, along with an `initializers` folder for scripts that get run on boot.
-- `db` - Contains the migrations needed to create our database schema.
+- `app.js` - The entry point to our application. This file defines our express server and connects it to MongoDB using mongoose. It also requires the routes and models we'll be using in the application.
+- `config/` - This folder contains configuration for passport as well as a central location for configuration/environment variables.
+- `routes/` - This folder contains the route definitions for our API.
+- `models/` - This folder contains the schema definitions for our Mongoose models.
+
+## Error Handling
+
+In `routes/api/index.js`, we define a error-handling middleware for handling Mongoose's `ValidationError`. This middleware will respond with a 422 status code and format the response to have [error messages the clients can understand](https://github.com/gothinkster/realworld/blob/master/API.md#errors-and-status-codes)
